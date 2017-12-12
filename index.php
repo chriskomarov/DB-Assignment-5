@@ -1,13 +1,25 @@
-<?php require 'header.php' ?>
+<?php require 'header.php';
+  require 'database.php';
+  $db = new Database();
+  $flowers = $db->getFlowers();
+?>
 
     <div class="container">
 
-        <form class="form-inline">
-		  <div class="form-group">
-			<label for="flower">Flower</label>
-			<select class="form-control" id="flower" ></select>
-		  </div>
-		  
+        <form class="form-inline" method = "get">
+    		  <div class="form-group">
+      			<label for="flower">Flower</label>
+      			<select class="form-control" id="flower" >
+              <option value = "-1">Select One</option>
+              <?php
+                  foreach($flowers as $f){  ?>
+                    <option value ="<?= $f["comname"]?>"><?php echo $f["comname"];?></option>
+                  <?php
+                    }
+               ?>
+            </select>
+    		  </div>
+
 		  <button type="submit" class="btn btn-default">Go</button>
 		</form>
 		<hr>
@@ -19,7 +31,7 @@
 				<th>Location</th>
 				<th>Sighted</th>
 			</tr>
-			
+
 		</table>
     </div><!-- /.container -->
 
