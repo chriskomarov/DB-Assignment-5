@@ -50,6 +50,7 @@ class Database{
 		return $stmt->execute(array(':comname'=>$comname, ':genus'=>$genus, ':species'=>$species, ':flower' =>$flower));
 
 	}
+<<<<<<< HEAD
 	public function addSighting($name, $person, $location, $sighted){
 		$this->getConnection();
 		echo("$name<br>$person<br>$location<br>$sighted<br>");
@@ -57,6 +58,14 @@ class Database{
 		$stmt = $this->conn->prepare($sql);
 		if($stmt == False) return False;
 		return $stmt->execute(array(':NAME'=>$name, ':PERSON'=>$person, ':LOCATION'=>$location, ':SIGHTED'=>$sighted));
+=======
+	public function addSighting($flower, $person, $location, $sighted){
+		$this->getConnection();
+		$sql = "INSERT INTO SIGHTINGS (NAME,PERSON,LOCATION,SIGHTED) VALUES (:flower, :person, :location, :sighted)";
+		$stmt = $this->conn->prepare($sql);
+		if($stmt == False) return False;
+		return $stmt->execute(array(':NAME'=>$flower, ':PERSON'=>$person, ':LOCATION'=>$location, ':SIGHTED'=>$sighted));
+>>>>>>> dde71fe44b1aee425f2b021f6403c54f1ada1ead
 	}
 
 	public function close(){
