@@ -18,7 +18,7 @@ class Database{
 			$cur_row['comname'] = $row['COMNAME'];
 			$cur_row['genus'] = $row['GENUS'];
 			$cur_row['species'] = $row['SPECIES'];
-			$results_array[] = $cur_row;
+			$results_array[$row['COMNAME']] = $cur_row;
 		}
 		return $results_array;
 	}
@@ -42,7 +42,12 @@ class Database{
 		}
 		return $results_array;
 	}
-	public function updateFlowers($flower, $genus, $species, $comname){
+	public function updateFlower($flower, $genus, $species, $comname){
+		$this->getConnection();
+		$sql = "UPDATE FLOWERS SET COMNAME = :comname, GENUS = :genus, SPECIES = :species WHERE COMNAME =:flower";
+		$stmt = $this->conn->prepare($sql);
+		if($stmt == False) return False;
+		return $stmt->execute(array(':comname'=>$comname, ':genus'=>$genus, ':species'=>$species, ':flower' =>$flower));
 
 	}
 	public function addSighting($flower, $person, $location, $sighted){
