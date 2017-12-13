@@ -11,7 +11,7 @@
       $comname = $_POST['comname'];
       $response = $db->updateFlower($req_flower, $genus, $species, $comname);
       if($response){
-        $message = $req_flower . "Flower entry has been updated!";
+        $message = $req_flower . " Flower entry has been updated!";
       }else{
         $message = $req_flower . " not updated.";
       }
